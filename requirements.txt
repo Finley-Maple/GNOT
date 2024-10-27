@@ -1,9 +1,23 @@
+# einops==0.6.1
+# matplotlib==3.4.3
+# networkx==2.6.3
+# numpy==1.20.3
+# scikit-learn==0.24.2
+# scipy==1.7.1
+# tqdm==4.62.3
+# dgl==0.6.1
+# torch==1.9.0
+# tensorflow==2.8.0
+# keras==2.8.0
 einops==0.6.1
 matplotlib==3.4.3
 networkx==2.6.3
-numpy==1.20.3
-scikit_learn==0.24.2
-scipy==1.7.1
+numpy==1.19.5  
+scikit-learn==1.5.2
+# scipy==1.14.1   # install with conda if not applicable
 tqdm==4.62.3
-dgl
-torch
+dgl==2.0.0
+torch==2.5.0
+tensorflow==2.18.0
+keras==3.5.0
+pandas

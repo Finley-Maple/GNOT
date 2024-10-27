@@ -34,7 +34,7 @@ Experiments of GNOT are conducted on multiple challenging datasets selected from
 
 Add dataset folder if it does not exists,
 
-``mdkir data``
+``mkdir data``
 
 ``cd data``
 
