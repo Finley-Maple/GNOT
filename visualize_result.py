@@ -13,11 +13,13 @@ from args import get_args
 from data_utils import get_dataset, get_model, get_loss_func, MIODataLoader
 from train import validate_epoch
 from utils import plot_heatmap
-
+import os
 
 if __name__ == "__main__":
 
-    model_path = '[Your model path]'
+    save_dir = './data/checkpoints'
+    model_name = 'heat2d_all_CGPTrel2_1029_17_33_50.pt'
+    model_path = save_dir + '/' + model_name
     result = torch.load(model_path,map_location='cpu')
 
 
@@ -64,27 +66,34 @@ if __name__ == "__main__":
         print(err)
         print(np.linalg.norm(err)/np.linalg.norm(target))
 
-
-
-
-
+        fig_save_dir = './data/figures'
+        if not os.path.exists(fig_save_dir):
+            os.makedirs(fig_save_dir)
+            
+        fig_save_path = fig_save_dir + '/' + model_name.replace('.pt','.png')
         #### choose one to visualize
         cm = plt.cm.get_cmap('rainbow')
-
-        plot_heatmap(x, y, pred,cmap=cm,show=True)
-        plot_heatmap(x, y, target,cmap=cm,show=True)
+        
+        plot_heatmap(x, y, pred,cmap=cm,path=fig_save_path.replace('.png','_pred_heatmap.png'))
+        plot_heatmap(x, y, target,cmap=cm,path=fig_save_path.replace('.png','_target_heatmap.png'))
 
 
         plt.figure()
-        plt.scatter(x, y, c=pred, cmap=cm,s=2)
+        plt.scatter(x, y, c=pred, cmap=cm, s=2)
         plt.colorbar()
+        # plt.savefig()
         plt.show()
+        
+        
         plt.figure()
         plt.scatter(x, y, c=err, cmap=cm,s=2)
         plt.colorbar()
-        plt.show()
-        plt.scatter(x, y, c=target, s=2,cmap=cm)
+        plt.savefig(fig_save_path.replace('.png','_err.png'))
+        # plt.show()
+        
+        plt.scatter(x, y, c=target, cmap=cm, s=2)
         plt.colorbar()
+        # plt.savefig()
         plt.show()
 
 
